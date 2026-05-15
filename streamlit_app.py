@@ -65,9 +65,10 @@ for k,v in {"messages":[],"queries":0,"tokens":0,"tool_calls":0}.items():
 
 with st.sidebar:
     st.markdown("<div style='padding:1.5rem 0 1rem'><span style='font-size:1.1rem;font-weight:600'>🔬 AgentIQ</span></div>", unsafe_allow_html=True)
-    api_key = os.getenv("OPENAI_API_KEY","")
+    api_key = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY", ""))
     if not api_key or api_key=="sk-your-key-here":
-        st.error("Add OPENAI_API_KEY to .env"); st.stop()
+        st.error("Add OPENAI_API_KEY to Streamlit Cloud Secrets (Settings → Secrets)"); st.stop()
+    os.environ["OPENAI_API_KEY"] = api_key
     st.markdown(f"<div style='margin-bottom:1.2rem'><span class='status-dot'></span><span style='font-size:.78rem'>OpenAI connected</span></div>", unsafe_allow_html=True)
 
     st.markdown("<div class='upload-label'>Available Tools</div>", unsafe_allow_html=True)
