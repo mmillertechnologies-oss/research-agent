@@ -7,9 +7,9 @@ This is what makes Project 2 impressive — it THINKS and ACTS autonomously
 import os
 import time
 from langchain_openai import ChatOpenAI
-from langchain.agents import AgentExecutor, create_openai_tools_agent
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.callbacks.base import BaseCallbackHandler
+from langchain.agents import AgentExecutor, create_tool_calling_agent
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.callbacks.base import BaseCallbackHandler
 from langchain_core.messages import AIMessage, HumanMessage
 from app.tools import ALL_TOOLS
 from dotenv import load_dotenv
@@ -85,7 +85,7 @@ def create_agent(step_callback=None):
         MessagesPlaceholder(variable_name="agent_scratchpad")
     ])
 
-    agent = create_openai_tools_agent(llm, ALL_TOOLS, prompt)
+    agent = create_tool_calling_agent(llm, ALL_TOOLS, prompt)
 
     executor = AgentExecutor(
         agent=agent,

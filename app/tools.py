@@ -10,7 +10,7 @@ import math
 import urllib.request
 import urllib.parse
 from datetime import datetime
-from langchain.tools import tool
+from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
